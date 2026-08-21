@@ -9,15 +9,10 @@ class daknam{
     static $name;
     public static function getIndex(){
         if (!self::$name){
-            self::$naem = new shuvo();
+            self::$name = new shuvo();
         }
         return self::$name;
     }
 }
-class shuvo{
-    function svo(){
-        echo "hi moin";
-    }
-}
-$amarName = new amarName();
+$amarName = new shuvo();
 $amarName->svo();
