@@ -25,12 +25,12 @@ if ($suvo==$moin){
 
 //wrong output
 $food = "apple"; 
-/* if($food == "tuna"){
-    echo "it has vitamin D\n";//wrong
-} */
+if($food == "tuna"){
+    printf("It has a vitamin D \n ",$food); //wrong
+} 
 
 
 //right anar jonno scaler valure ke age pass korte hobe
 if("tuna"==$food){
-    echo "It has a vitamin D \n ";
+    printf("It has a vitamin D \n ",$food);
 }

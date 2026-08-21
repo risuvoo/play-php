@@ -7,6 +7,7 @@ $factorial = 1;
     } 
 printf("Factorial number is %d = %d",$number,$factorial);
 echo "\n";
+
 //dam coding 1 to 10 factorial number
 $j = 1; //j ta dia shudhu operation hoice koeta ta cheak korlam aita factorial program er kono ongsho na
 for ($n=1;$n<=10;$n++){
@@ -19,6 +20,7 @@ for ($n=1;$n<=10;$n++){
     printf("Factorial number is %d = %d\n",$i,$factorial);
 }
 echo "$j total operation";
+
 //smart coding 1 to 10 factorial number
 
 $factorial = 1; 
