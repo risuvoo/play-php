@@ -1,0 +1,3 @@
+<?php
+
+// Encapsulation, Inheritance & Polymorphism
