@@ -1,0 +1,15 @@
+{
+  "name": "risuvo/exercise-3",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "risuvoo",
+      "email": "rafiqulislamsuvobd@gmail.com"
+    }
+  ],
+  "require": {}
+}

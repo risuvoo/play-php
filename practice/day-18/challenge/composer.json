@@ -1,0 +1,15 @@
+{
+  "name": "risuvo/challenge",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "risuvoo",
+      "email": "rafiqulislamsuvobd@gmail.com"
+    }
+  ],
+  "require": {}
+}
