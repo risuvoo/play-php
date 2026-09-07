@@ -1,3 +1,0 @@
-<?php
-
-//  Database & SQL Fundamentals
