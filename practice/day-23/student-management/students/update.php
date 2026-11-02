@@ -2,10 +2,23 @@
 
 require_once __DIR__ . "../../config/db.php";
 
-$id = $_POST['id'];
-$name = $_POST['name'];
-$email = $_POST['email'];
-$age = $_POST['age'];
+$id = trim($_POST['id']);
+$name = trim($_POST['name']);
+$email = trim($_POST['email']);
+$age = trim($_POST['age']);
+
+if(empty($name)){
+    die("Name is required");
+}
+
+if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+    die("Invalid email");
+}
+
+if($age<1){
+    die("Invalid age");
+}
+
 
 
 // query
@@ -21,3 +34,6 @@ $stmt->execute([
     'age' => $age,
     'id' => $id
 ]);
+
+header("Location: index.php");
+exit;

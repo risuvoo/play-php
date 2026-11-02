@@ -132,7 +132,6 @@
                     name="name" 
                     class="form-control" 
                     placeholder="Enter full name" 
-                    required
                 >
             </div>
 
@@ -144,7 +143,6 @@
                     name="email" 
                     class="form-control" 
                     placeholder="Enter email address" 
-                    required
                 >
             </div>
 
@@ -158,7 +156,6 @@
                     placeholder="Enter age" 
                     min="1" 
                     max="120" 
-                    required
                 >
             </div>
 

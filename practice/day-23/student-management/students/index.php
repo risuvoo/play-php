@@ -162,14 +162,17 @@ $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($students as $student):
                     ?>
                     <tr>
-                        <td><?= $student['id'] ?></td>
-                        <td><?= $student['name'] ?></td>
-                        <td><?= $student['email'] ?></td>
-                        <td><?= $student['age'] ?></td>
+                        <td><?= htmlspecialchars($student['id']) ?></td>
+                        <td><?= htmlspecialchars($student['name']) ?></td>
+                        <td><?= htmlspecialchars($student['email']) ?></td>
+                        <td><?= htmlspecialchars($student['age']) ?></td>
                         <td>
                             <div class="actions">
                                 <a href="edit.php?id=<?= $student['id']; ?>" class="btn-edit">Edit</a>
-                                <a href="delete.php?id=<?= $student['id']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+                                <form action="delete.php" method="POST">
+                                    <input type="hidden" name="id"   value="<?= htmlspecialchars($student['id']); ?>">
+                                    <button type="submit" class="btn-delete" style="border: none">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

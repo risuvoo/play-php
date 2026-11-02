@@ -151,7 +151,6 @@ if(!$student){
                     name="name" 
                     class="form-control" 
                     placeholder="Enter full name" 
-                    required
                     value="<?= $student['name']; ?>"
                 >
             </div>
@@ -164,8 +163,7 @@ if(!$student){
                     name="email" 
                     class="form-control" 
                     placeholder="Enter email address" 
-                    required
-                    value="<?= $student['email']; ?>"
+                    value="<?= htmlspecialchars($student['email']); ?>"
                 >
             </div>
 
@@ -179,8 +177,7 @@ if(!$student){
                     placeholder="Enter age" 
                     min="1" 
                     max="120" 
-                    required
-                    value="<?= $student['age']; ?>"
+                    value="<?= htmlspecialchars($student['age']); ?>"
                 >
             </div>
 
