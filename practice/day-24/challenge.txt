@@ -1,0 +1,16 @@
+1. laravel version = Laravel Framework 13.39.0
+2. php version = PHP 8.4.26 (cli) (built: Sep 22 2026 15:11:32) (NTS Visual C++ 2022 x64)
+Copyright (c) The PHP Group
+Built by The PHP Group
+Zend Engine v4.4.26, Copyright (c) Zend Technologies
+    with Zend OPcache v8.4.26, Copyright (c), by Zend Technologies
+3. Available routes = php artisan route:list
+
+ GET|HEAD / .. routes/web.php:5
+ GET|HEAD storage/{path} .. storage.local › vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:111
+ PUT storage/{path} .. storage.local.upload › vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:119
+ GET|HEAD up .. Illuminate\Foundation › HealthCheck
+
+ Showing [4] routes
+
+ 4. Created controller-এর file path = exercise-1-laravel-installed\task-manager\app\Http\Controllers\TaskController.php

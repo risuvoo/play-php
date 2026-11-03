@@ -1,0 +1,34 @@
+1. Laravel-এর জন্য কী কী প্রয়োজন?
+প্রয়োজনীয় tools:
+Tool	
+PHP	
+Composer	
+MySQL	
+Laravel
+VS Code	
+Terminal
+
+php -v => php exist or not
+composer -V => composer exit or not
+php -m => এখানে Laravel-এর প্রয়োজনীয় extensions enabled আছে কি না দেখতে পারবে
+composer create-project laravel/laravel task-manager => Composer দিয়ে Laravel project তৈরি করো
+php artisan serve => Development server চালাও
+
+2. Artisan কী?
+Artisan হলো Laravel-এর built-in CLI tool। এটি দিয়ে বিভিন্ন development task করা যায়
+
+php artisan list => সব available commands দেখতে
+php artisan --version => Laravel version দেখতে
+php artisan route:list => Routes দেখতে
+php artisan make:controller TaskController => Controller তৈরি করতে
+php artisan make:model Task => Model তৈরি করতে
+
+3. কিছু গুরুত্বপূর্ণ বিষয়:
+- app/ — Application-এর মূল PHP code।
+- routes/ — Application-এর routes।
+- resources/views/ — Blade templates।
+- database/ — Migrations, seeders ও factories।
+- public/ — Public entry point ও assets।
+- .env — Environment configuration।
+- vendor/ — Composer-installed packages।
+- artisan — Laravel CLI entry point।
