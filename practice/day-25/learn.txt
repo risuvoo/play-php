@@ -1,0 +1,162 @@
+# task-manager project-এর structure
+task-manager/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Middleware/
+│   │   └── Requests/
+│   ├── Models/
+│   └── Providers/
+├── bootstrap/
+├── config/
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+├── public/
+├── resources/
+│   ├── css/
+│   ├── js/
+│   └── views/
+├── routes/
+│   ├── web.php
+│   └── console.php
+├── storage/
+├── tests/
+├── vendor/
+├── .env
+├── artisan
+├── composer.json
+└── composer.lock
+
+# app/ — Application logic
+এখানে মূল PHP application code থাকবে।
+
+# Controllers
+Request receive করে প্রয়োজনীয় logic execute করে এবং response return করে।
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TaskController extends Controller
+{
+    public function index()
+    {
+        return "All Tasks";
+    }
+}
+
+# Models
+Database table-এর সঙ্গে interact করার জন্য Eloquent Model ব্যবহার হয়।
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Task extends Model
+{
+}
+
+# Middleware
+Request controller-এ পৌঁছানোর আগে বা response ফেরত যাওয়ার পথে request filter বা inspect করে।
+উদাহরণ: Authentication check।
+
+# Requests
+Form validation এবং request-related logic আলাদা রাখতে Form Request classes ব্যবহার করা হয়।
+
+# routes/ — Routing
+এখানে application-এর URL এবং controller method define করা হয়।
+- web.php — Web routes।
+- console.php — Console commands এবং scheduled tasks-এর মতো console-related definitions।
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/tasks', function () {
+    return 'Task List';
+});
+
+
+# resources/ — Frontend resources
+
+resources/
+├── css/
+├── js/
+└── views/
+
+- css/ — CSS files
+- js/ — JavaScript files
+- views/ — Blade templates
+Blade হলো Laravel-এর templating engine।
+
+
+# database/ — Database related files
+
+database/
+├── factories/
+├── migrations/
+└── seeders/
+
+migrations -> Database schema তৈরি ও পরিবর্তন
+seeders -> Database-এ initial/sample data insert
+factories -> Fake/test data generate
+
+
+# public/ — Public entry point
+
+এখানে index.php থাকে।
+
+Browser থেকে request প্রথমে Laravel-এর public entry point-এ প্রবেশ করে।
+
+এখানে public assets-ও থাকতে পারে।
+
+
+# config/ — Configuration
+Laravel-এর বিভিন্ন configuration file এখানে থাকে।
+
+config/
+├── app.php
+├── auth.php
+├── database.php
+├── cache.php
+└── session.php
+Database configuration সাধারণত config/database.php-এ থাকে, আর actual credentials .env থেকে আসে।
+
+# storage/ — Generated files
+এখানে Laravel-এর generated files সংরক্ষিত হয়।
+- Logs
+- Cache
+- Compiled Blade views
+- Uploaded files (কিছু ক্ষেত্রে)
+
+# bootstrap/ — Framework bootstrapping
+Laravel application initialize এবং bootstrap করার প্রয়োজনীয় code এখানে থাকে।
+Laravel 13-এ bootstrap/app.php বিশেষ গুরুত্বপূর্ণ। এখানে middleware, routing এবং exception handling configuration করা যায়।
+
+# vendor/ — Dependencies
+Composer দিয়ে install করা third-party packages এখানে থাকে।
+
+vendor/
+├── laravel/
+├── symfony/
+├── composer/
+└── autoload.php
+এটি নিজে edit করবে না।
+
+
+# Root files
+.env ->	Environment variables
+.env.example ->	Environment configuration template
+artisan -> CLI command entry point
+composer.json -> Dependencies এবং autoload configuration
+composer.lock -> Exact dependency versions
+
+# Laravel Request Lifecycle
+1. Browser: User URL visit করে।
+2. public/index.php: Request Laravel application-এ প্রবেশ করে।
+3. bootstrap/app.php: Application bootstrap হয়।
+4. Routing: Laravel matching route খুঁজে বের করে।
+5. Middleware: Authentication বা অন্যান্য checks হয়।
+6. Controller: Controller-এর method execute হয়।
+7. Model/Database: প্রয়োজন হলে database থেকে data নেয়।
+8. Response: Laravel response তৈরি করে browser-এ পাঠায়।
