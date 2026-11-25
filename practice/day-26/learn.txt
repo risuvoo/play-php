@@ -1,0 +1,144 @@
+Laravel 13-এর নতুন project-এ api.php defaultভাবে নাও থাকতে পারে। API routing চালু করতে:
+
+=> php artisan install:api
+
+### Route Parameters
+1. URL থেকে dynamic value গ্রহণ করতে Route Parameters ব্যবহার করা হয়।
+Route::get('/tasks/{id}', function ($id) {
+    return "Task ID: " . $id;
+});
+
+2. একাধিক parameter:
+Route::get('/users/{userId}/tasks/{taskId}', function ($userId, $taskId) {
+    return "User: $userId, Task: $taskId";
+});
+
+3. Optional parameter:
+Route::get('/users/{name?}', function ($name = 'Guest') {
+    return "Hello " . $name;
+});
+
+
+### Route Constraints
+Parameter-এর value নির্দিষ্ট pattern অনুযায়ী validate করতে পারো।
+Route::get('/tasks/{id}', function ($id) {
+    return "Task ID: " . $id;
+})->whereNumber('id');
+এখন /tasks/10 valid, কিন্তু /tasks/abc route match করবে না।
+
+***আরও কিছু constraints:
+->whereAlpha('name')
+->whereAlphaNumeric('username')
+->whereUuid('id')
+
+*** constraints Custom regex:
+Route::get('/category/{name}', function ($name) {
+    return $name;
+})->where('name', '[A-Za-z]+');
+
+### Named Routes
+Route-কে একটি unique name দেওয়া যায়। পরে URL hardcode না করে route name দিয়ে URL generate করা যায়।
+Route::get('/tasks', function () {
+    return 'Task List';
+})->name('tasks.index');
+
+Usecase:
+***URL generate:
+$url = route('tasks.index');
+
+*** Blade template-এ:
+<a href="{{ route('tasks.index') }}">Tasks</a>
+
+### Route Redirect
+একটি route থেকে অন্য URL-এ redirect করা যায়।
+Route::redirect('/old-tasks'. '/tasks')
+
+***Named route-এ redirect:
+Route::get('/go-tasks',function(){
+    return redirect()->route('tasks.index)
+})
+
+### Route Groups
+একাধিক route-এর common prefix বা middleware একসঙ্গে define করতে Route Group ব্যবহার করা হয়।
+
+*** Prefix group
+Route::prefix('admin')->group(function(){
+    Route::get('/dashboard',function(){
+        return 'Admin Dashboard'
+    });
+    Route::get('/users',function(){
+        return 'Admin Users'
+    });
+});
+
+USAGE:
+/admin/dashboard
+/admin/users
+
+*** Middleware group
+Route::middleware(['auth'])->group(function(){
+    Route::get('/profile',function(){
+        return 'User Profile';
+    })
+    Route::get('/settings', function(){
+        return 'User Settings';
+    })
+});
+এখানে authentication middleware দিয়ে routes protect করা হয়েছে।
+
+*** Name group
+Route::name('admin.')->group(function(){
+
+    Route::get('/dashboard',function(){
+        return 'Dashboard';
+    })->name('dashboard');
+});
+
+USAGE:
+admin.dashboard
+
+### Controller-এর সঙ্গে Route
+Real-world application-এ route-এর মধ্যে business logic না লিখে Controller ব্যবহার করা হয়।
+
+*** TaskController.php:
+namespace App\Http\Controllers;
+class TaskController extends Controller{
+    public function index(){
+        return 'All Tasks';
+    }
+    public function show($id){
+        return "Task ID:".$id;
+    }
+}
+*** routes/web.php:
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+
+Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/tasks/{id}',[TaskController::class, 'show']);
+
+### Resource Routes
+Laravel-এ CRUD-এর জন্য একটি resource controller-এর সাতটি conventional route একসঙ্গে define করা যায়। Resource route ব্যবহার করলে CRUD-এর জন্য প্রতিটি route আলাদাভাবে লিখতে হয় না।
+
+Route::resource('/tasks', TaskController::class);
+
+এটি নিচের routes তৈরি করে:
+| HTTP       | URI                | Controller Method |
+|------------|--------------------|-------------------|
+| GET        | /tasks             | index             |
+| GET        | /tasks/create      | create            |
+| POST       | /tasks             | store             |
+| GET        | /tasks/{task}      | show              |
+| GET        | /tasks/{task}/edit | edit              |
+| PUT/PATCH  | /tasks/{task}      | update            |
+| DELETE     | /tasks/{task}      | destroy           |
+
+*** সব routes দেখতে: php artisan route:list
+*** নির্দিষ্ট resource-এর routes দেখতে: php artisan route:list --path=tasks
+
+### Route Cache:
+Production environment-এ route caching performance উন্নত করতে পারে।
+php artisan route:cache
+Cache clear: php artisan route:clear
+
+Development-এ route পরিবর্তন করার পর প্রয়োজনে cache clear করবে।
