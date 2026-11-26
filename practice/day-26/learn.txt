@@ -51,7 +51,7 @@ $url = route('tasks.index');
 
 ### Route Redirect
 একটি route থেকে অন্য URL-এ redirect করা যায়।
-Route::redirect('/old-tasks'. '/tasks')
+Route::redirect('/old-tasks', '/tasks')
 
 ***Named route-এ redirect:
 Route::get('/go-tasks',function(){
